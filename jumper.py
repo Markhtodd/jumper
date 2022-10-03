@@ -5,7 +5,6 @@
     # If the puzzle is solved the game is over.
     # If the player has no more parachute the game is over.
 
-from calendar import c
 import random
 
 class game:
@@ -39,19 +38,24 @@ class game:
             self.misses = self.misses + 1
         self.letters.sort()
         self.answers.sort()
-        self.print_word()
         self.print_jumper() 
+        self.eval()
 
-
-    print('\n\n\n\')
-        word.guessed = ''
-    def print_word(self):
+    def eval(self):
+        print('\n')
+        word_guessed = ''
         for i in self.word:
             if i in self.answers:
-                
+                    word_guessed = word_guessed + i
+            else: 
+                    word_guessed = word_guessed + '_'
+        print(word_guessed)
+        if "_" not in word_guessed:
+            print('You win! ')    
+            return   
 
     def print_jumper(self):
-        print('\n\n')
+        print('\n')
         if self.misses < 1:
             print(' ____ ')
         if self.misses < 2:
@@ -68,7 +72,7 @@ class game:
             print('   O   ')    
         print(' / | \ ')
         print('  / \ ')
-        print('\n\n')
+        print('\n')
         print(f'correct answers: {self.answers}')
         print(f'Total guesses {self.letters}')
 
